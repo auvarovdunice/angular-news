@@ -1,0 +1,65 @@
+﻿<div class="register-wrapper">
+  <div class="form-container">
+    <h2>Register</h2>
+    <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <input matInput placeholder="Username"
+               formControlName="username"
+               [errorStateMatcher]="matcher"
+        >
+        <mat-error *ngIf="f.username.hasError('required')">
+          username is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput
+               placeholder="Email"
+               formControlName="email"
+               [errorStateMatcher]="matcher"
+        >
+        <mat-error *ngIf="f.email.hasError('required')">
+          email is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="!f.email.hasError('required')">
+          email is not <strong>valid</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput
+               placeholder="Password"
+               formControlName="password"
+               [errorStateMatcher]="matcher"
+               type="password"
+
+        >
+        <mat-error *ngIf="f.password.hasError('minlength') && !f.password.hasError('required')">
+          Please enter a valid password
+        </mat-error>
+        <mat-error *ngIf="f.password.hasError('required')">
+          password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput
+               placeholder="Confirm password"
+               formControlName="confirmPassword"
+               [errorStateMatcher]="matcher"
+               type="password"
+        >
+        <mat-error *ngIf="f.confirmPassword.hasError('minlength') && !f.confirmPassword.hasError('required')">
+          Please enter a valid password
+        </mat-error>
+        <mat-error *ngIf="f.confirmPassword.hasError('required')">
+          password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <div class="form-group">
+        <button [disabled]="loading" mat-button>Send</button>
+        <img *ngIf="loading"
+             src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+        <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+

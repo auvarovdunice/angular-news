@@ -1,0 +1,6 @@
+<mat-progress-bar
+  *ngIf="progressBarService.value !==0 && progressBarService.value !==100"
+  mode="determinate"
+  [value]="progressBarService.value"
+>
+</mat-progress-bar>

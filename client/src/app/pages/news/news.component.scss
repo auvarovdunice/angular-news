@@ -1,0 +1,118 @@
+.news-wrapper {
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  .delete {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: none;
+    transition: .6s font-size;
+    cursor: pointer;
+    &:hover {
+      font-size: 25px;
+      transition: .6s font-size;
+    }
+  }
+  @media (max-width: 1050px) {
+    flex-direction: column;
+    align-items: center;
+    .news {
+      width: 100% !important;
+    }
+    .create-news {
+      width: 100% !important;
+      .news-form {
+        width: 96%;
+      }
+
+    }
+  }
+  .news {
+    margin: 16px 0px;
+    width: 75%;
+    padding: 0;
+    .news-container {
+      border: none;
+      box-shadow: none;
+      .post {
+        position: relative;
+      }
+      .search-container {
+        border: none;
+        box-shadow: none;
+      }
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 10px;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        .user {
+          display: flex;
+          align-items: center;
+          padding: 0;
+          margin: 0;
+          border: none;
+          box-shadow: none;
+          img {
+            width: 50px;
+            border-radius: 100px;
+            height: 50px;
+          }
+          span {
+            margin-left: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #253962;
+            box-sizing: border-box;
+            font-family: SFDregular,Arial,Helvetica,sans-serif;
+          }
+        }
+        .date {
+          font-size: 12px;
+          color: #9da6bf;
+        }
+      }
+      .message {
+        border: none;
+        box-shadow: none;
+
+      }
+    }
+  }
+  .create-news {
+    width: 20%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 250px;
+    .news-form {
+      display: flex;
+      flex-direction: column;
+    }
+    button {
+      margin: auto;
+      display: block;
+    }
+  }
+}
+
+div {
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  margin: 1rem 0;
+  padding: 1em 1em;
+  border-radius: .28571429rem;
+  border: 1px solid rgba(34,36,38,.15);
+}

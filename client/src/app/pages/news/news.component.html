@@ -1,0 +1,79 @@
+<app-news-header></app-news-header>
+<div class="news-wrapper">
+  <div class="create-news">
+    <mat-toolbar>Add news</mat-toolbar>
+    <form class="news-form" [formGroup]="newsForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <input matInput
+               placeholder="Title"
+               formControlName="title"
+               [errorStateMatcher]="matcher"
+        >
+        <mat-error *ngIf="f.title.hasError('required')">
+          Title is <strong>required</strong>!
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput
+               placeholder="Message"
+               formControlName="message"
+               [errorStateMatcher]="matcher"
+        >
+        <mat-error *ngIf="f.message.hasError('required')">
+          Message is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <button [disabled]="loading" mat-button>Send</button>
+      <img
+        *ngIf="loading"
+        src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+      />
+    </form>
+  </div>
+  <div class="news">
+    <mat-toolbar>News</mat-toolbar>
+    <div class="news-container" *ngIf="viewPosts">
+      <div class="search-container">
+        <mat-form-field>
+          <input matInput
+                 placeholder="Search"
+                 (keyup)="find()"
+                 [(ngModel)]="searchValue"
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Search Type" [(value)]="selectedType">
+            <mat-option *ngFor="let searchType of searchTypes" [value]="searchType.value">
+              {{searchType.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="post" *ngFor="let post of viewPosts; index as i "[@alertAnimation]>
+        <button class="delete"  [disabled]="loading" mat-button (click)="delete(post.id)">×</button>
+        <div class="title">
+          <div class="user">
+            <img [src]="'api/' + post.avatar" alt="">
+            <span>{{post.username}}</span>
+          </div>
+          <span class="date">
+            {{post.createdAt | date:"HH:mm:ss/dd/MM/yyyy"}}
+          </span>
+        </div>
+        <h1>{{post.title}}</h1>
+        <div class="message">
+          {{post.message}}
+        </div>
+      </div>
+      <mat-paginator [length]="posts.length"
+                     [pageSize]="pageSize"
+                     [pageIndex]="pageIndex"
+                     [pageSizeOptions]="pageSizeOptions"
+                     (page)="pageEvent($event)">
+      >
+
+      </mat-paginator>
+    </div>
+  </div>
+
+</div>

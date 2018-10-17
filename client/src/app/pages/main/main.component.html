@@ -1,0 +1,16 @@
+<div class="home-wrapper" *ngIf="users;else unset">
+  <h1>
+    Welcome to the News
+  </h1>
+  <button (click)="authenticationService.logout()">
+    Logout
+  </button>
+  <ul *ngFor="let user of users">
+      <li>id:{{user.id}}</li>
+      <li>email: {{user.email}}</li>
+      <li>username:{{user.username}}</li>
+  </ul>
+</div>
+<ng-template #unset>
+  <mat-spinner style="text-align: center; margin-top: 100px;"></mat-spinner>
+</ng-template>

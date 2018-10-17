@@ -1,0 +1,49 @@
+<app-profile-header></app-profile-header>
+<main class="profile-wrapper">
+  <mat-toolbar>Its your profile!</mat-toolbar>
+  <div class="content" *ngIf="user">
+    <div class="avatar-container">
+      <div class="avatar" (click)="triggerInput()">
+        <img class="ava" [src]="'api/' + user?.personal.avatar" alt="">
+        <img class="add" src="./../../../assets/add.png" alt="">
+      </div>
+      <button mat-button *ngIf="selected" (click)="upload()">Upload</button>
+    </div>
+    <input id="avatar" style="display: none;" type="file" #fileInput (change)="selected = true">
+    <div class="info">
+      <mat-toolbar>User info</mat-toolbar>
+      <mat-list role="list">
+        <mat-list-item role="listitem">id: {{ user.id }}</mat-list-item>
+
+        <mat-list-item [@alertAnimation] role="listitem" *ngIf="!usernameFlag"
+                       (dblclick)="usernameFlag = !usernameFlag">Username: {{ user.username }}
+        </mat-list-item>
+        <form class="user-form" *ngIf="usernameFlag" [@alertAnimation]>
+          <mat-form-field class="example-full-width">
+            <input matInput
+                   appAutoFocus
+                   placeholder="Username"
+                   (blur)="usernameFlag = !usernameFlag"
+            >
+          </mat-form-field>
+        </form>
+        <mat-list-item role="listitem"
+                       *ngIf="!emailFlag"
+                       (dblclick)="emailFlag = !emailFlag"
+                       [@alertAnimation]
+        >Email: {{ user.email }}</mat-list-item>
+        <form class="user-form" *ngIf="emailFlag" [@alertAnimation]>
+          <mat-form-field class="example-full-width">
+            <input matInput
+                   appAutoFocus
+                   placeholder="Email"
+                   (blur)="emailFlag = !emailFlag"
+            >
+          </mat-form-field>
+        </form>
+        <mat-list-item role="listitem">createdAt: {{ user.createdAt }}</mat-list-item>
+        <mat-list-item role="listitem">updatedAt: {{ user.updatedAt }}</mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</main>
